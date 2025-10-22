@@ -1,0 +1,98 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.venv
+
+# PyCharm
+.idea/
+
+# VSCode
+.vscode/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# ML Models & Data
+ml_training/models/*.pkl
+ml_training/models/*.joblib
+ml_training/data/*.json
+ml_training/data/*.jsonl
+*.h5
+*.model
+
+# Results & Logs
+results/*.json
+results/*.csv
+results/*.png
+*.log
+logs/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# OS specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Test coverage
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Secrets and credentials
+secrets.json
+credentials.json
+*.pem
+*.key
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
