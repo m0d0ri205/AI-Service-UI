@@ -156,8 +156,3 @@ project_root/
 - **Scikit-learn Documentation.** Logistic Regression, One-Vs-Rest, Ridge Regression API Guide.  
 
 ---
-
-## 🧾 작성 정보
-- **작성자:** 이정민 (정보보호학과 / SecurityFirst 회장)  
-- **파일명:** `docs/process_readme.md`  
-- **버전:** v1.0.0 (2025-10 기준)
