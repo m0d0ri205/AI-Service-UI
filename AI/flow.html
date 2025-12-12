@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>딥러닝 훈련 과정 플로우차트</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+        }
+        
+        .flowchart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .node {
+            padding: 20px 30px;
+            border-radius: 10px;
+            font-weight: 500;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            max-width: 400px;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .node:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .start {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 1.2em;
+            border-radius: 50px;
+        }
+        
+        .process {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        
+        .decision {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            padding: 40px;
+            min-width: 300px;
+        }
+        
+        .action {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+        }
+        
+        .save {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+        }
+        
+        .end {
+            background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+            color: white;
+            font-size: 1.2em;
+            border-radius: 50px;
+        }
+        
+        .arrow {
+            width: 3px;
+            height: 30px;
+            background: #667eea;
+            position: relative;
+        }
+        
+        .arrow::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: -5px;
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 12px solid #667eea;
+        }
+        
+        .loop-section {
+            border: 3px dashed #764ba2;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 20px 0;
+            background: rgba(102, 126, 234, 0.05);
+        }
+        
+        .loop-label {
+            color: #764ba2;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .branch-container {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        
+        .branch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .branch-label {
+            font-weight: bold;
+            color: #667eea;
+            padding: 5px 15px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 딥러닝 모델 훈련 플로우차트</h1>
+        
+        <div class="flowchart">
+            <!-- Start -->
+            <div class="node start">🚀 훈련 시작</div>
+            <div class="arrow"></div>
+            
+            <!-- Initialize -->
+            <div class="node process">📊 초기화<br>loss_history, acc_history, best_loss</div>
+            <div class="arrow"></div>
+            
+            <!-- Epoch Loop -->
+            <div class="loop-section">
+                <div class="loop-label">🔄 에포크 루프 (EPOCH 반복)</div>
+                <div class="flowchart">
+                    <div class="node decision">에포크 루프 시작</div>
+                    <div class="arrow"></div>
+                    
+                    <div class="node action">🎯 model.train() 설정</div>
+                    <div class="arrow"></div>
+                    
+                    <div class="node process">변수 초기화<br>train_loss, correct, total</div>
+                    <div class="arrow"></div>
+                    
+                    <!-- Training Loop -->
+                    <div class="loop-section" style="border-color: #f5576c;">
+                        <div class="loop-label" style="color: #f5576c;">🔄 훈련 데이터로더 루프</div>
+                        <div class="flowchart">
+                            <div class="node process">📥 배치 로드 & GPU 이동<br>X_batch, y_batch → DEVICE</div>
+                            <div class="arrow"></div>
+                            <div class="node action">🧹 optimizer.zero_grad()</div>
+                            <div class="arrow"></div>
+                            <div class="node action">⚡ output = model(X_batch)</div>
+                            <div class="arrow"></div>
+                            <div class="node action">📉 loss = criterion(output, y_batch)</div>
+                            <div class="arrow"></div>
+                            <div class="node action">🔙 loss.backward()</div>
+                            <div class="arrow"></div>
+                            <div class="node action">⚙️ optimizer.step()</div>
+                            <div class="arrow"></div>
+                            <div class="node process">📊 손실 & 정확도 누적</div>
+                        </div>
+                    </div>
+                    
+                    <div class="arrow"></div>
+                    <div class="node process">✅ 훈련 정확도 계산</div>
+                    <div class="arrow"></div>
+                    
+                    <div class="node action">🔍 model.eval() 설정</div>
+                    <div class="arrow"></div>
+                    
+                    <div class="node process">변수 초기화<br>val_loss, correct, total</div>
+                    <div class="arrow"></div>
+                    
+                    <!-- Validation Loop -->
+                    <div class="loop-section" style="border-color: #00f2fe;">
+                        <div class="loop-label" style="color: #00f2fe;">🔄 검증 데이터로더 루프</div>
+                        <div class="flowchart">
+                            <div class="node process">📥 배치 로드 & GPU 이동<br>X_batch, y_batch → DEVICE</div>
+                            <div class="arrow"></div>
+                            <div class="node action">⚡ output = model(X_batch)</div>
+                            <div class="arrow"></div>
+                            <div class="node action">📉 loss = criterion(output, y_batch)</div>
+                            <div class="arrow"></div>
+                            <div class="node process">📊 손실 & 정확도 누적</div>
+                        </div>
+                    </div>
+                    
+                    <div class="arrow"></div>
+                    <div class="node process">✅ 검증 정확도 계산</div>
+                    <div class="arrow"></div>
+                    
+                    <!-- Decision Branch -->
+                    <div class="node decision">val_loss < best_loss?</div>
+                    <div class="arrow"></div>
+                    
+                    <div class="branch-container">
+                        <div class="branch">
+                            <div class="branch-label">✅ Yes</div>
+                            <div class="node save">💾 최고 모델 저장</div>
+                        </div>
+                        <div class="branch">
+                            <div class="branch-label">❌ No</div>
+                            <div class="node process">⏭️ 저장 건너뛰기</div>
+                        </div>
+                    </div>
+                    
+                    <div class="arrow"></div>
+                    <div class="node process">📝 loss_history에 추가</div>
+                </div>
+            </div>
+            
+            <div class="arrow"></div>
+            
+            <!-- End -->
+            <div class="node end">🎉 훈련 완료</div>
+        </div>
+    </div>
+</body>
+</html>

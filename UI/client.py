@@ -27,7 +27,7 @@ class App(ctk.CTk):
         # History에 저장될 데이터 리스트
         self.history_items = []
 
-        # 기본 JSON (Specification 화면에 초기 표시됨)
+        # 기본 JSON (Specification 화면에 초기 표시됨) - 이는 결과 예시입니다.
         self.default_json = """{
     "workflow_status": "COMPLETED_SUCCESS",
     "flag": "SF{sf_flag1}",
